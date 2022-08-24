@@ -18,12 +18,13 @@ pipeline {
         agent {
           docker {
             image 'flyway/flyway:9.1.6'
-            args '--entrypoint=flyway'
+            args '--entrypoint='
+            args '-v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf'
           }
         }
       steps {
         //withDockerContainer("flyway/flyway:9.1.6"){
-        sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:9.1.6 -user=sonaruser -password=sonar info'
+        sh 'flyway -user=sonaruser -password=sonar info'
       }
     }
 	  /*stage('Verify Version') {
