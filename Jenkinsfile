@@ -9,19 +9,11 @@ pipeline {
     	timeout(time: 30, unit: 'MINUTES')
     }
     stages {
-      stage('Verify Version') {
-          steps {
-            script {
-              sh 'id'
-              sh 'sudo flyway --version'
-          }
-        }
-      }
-     stage('migrate') {
+     stage('Local DB: migrate') {
       steps {
         script {
-        sh "sudo flyway -user=sonaruser -password=sonar info"
-        sh "sudo flyway -user=sonaruser -password=sonar clean"
+          sh 'sudo flyway --version'
+          sh "sudo flyway -configFiles=./conf/env_dev.conf-user=sonaruser -password="${DB_CREDS}" info"
       }
     }
   }
