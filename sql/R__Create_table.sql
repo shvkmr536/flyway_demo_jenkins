@@ -5,3 +5,6 @@ CREATE TABLE links (
 	description VARCHAR (255),
     last_update DATE
 );
+
+INSERT INTO links (url, name)
+VALUES('https://www.postgresqltutorial.com','PostgreSQL Tutorial');
