@@ -9,7 +9,18 @@ pipeline {
     	timeout(time: 30, unit: 'MINUTES')
     }
     stages {
-	  stage('Verify Version') {
+      stage('Verify Version') {
+              steps {
+                  sh 'docker run --rm flyway/flyway:9.1.6 version'
+                }
+            }
+     stage('migrate') {
+      steps {
+        withDockerContainer("flyway/flyway:9.1.6"){
+        sh 'flyway -user=sonaruser -password=sonar info'
+      }
+    }
+	  /*stage('Verify Version') {
               steps {
                   sh 'docker run --rm flyway/flyway:8.5.11 version'
                 }
@@ -28,11 +39,11 @@ pipeline {
       steps {
         sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:8.5.11 -user=sonaruser -password=sonar info'
       }
-    }
+    }*/
 }
-    post {
-       always {
-          cleanWs()
-       }
-    }   
+post {
+    always {
+      cleanWs()
+    }
+  }   
 }
