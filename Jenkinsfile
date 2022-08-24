@@ -13,14 +13,14 @@ pipeline {
           steps {
             script {
               sh 'id'
-              sh 'flyway --version'
+              sh 'sudo flyway --version'
           }
         }
       }
      stage('migrate') {
       steps {
         script {
-        sh "flyway -user=sonaruser -password=sonar info"
+        sh "sudo flyway -user=sonaruser -password=sonar info"
       }
     }
   }
