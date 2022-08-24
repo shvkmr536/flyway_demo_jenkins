@@ -15,12 +15,17 @@ pipeline {
                 }
             }*/
      stage('migrate') {
+        agent {
+          docker {
+            image 'flyway/flyway:9.1.6'
+            args '--entrypoint='
+          }
+        }
       steps {
-        withDockerContainer("flyway/flyway:9.1.6"){
+        //withDockerContainer("flyway/flyway:9.1.6"){
         sh 'flyway -user=sonaruser -password=sonar info'
       }
     }
-  }
 	  /*stage('Verify Version') {
               steps {
                   sh 'docker run --rm flyway/flyway:8.5.11 version'
