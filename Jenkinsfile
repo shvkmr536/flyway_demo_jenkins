@@ -10,15 +10,19 @@ pipeline {
     }
     stages {
       stage('Verify Version') {
-              steps {
-                  sh 'flyway --version'
-                }
-            }
+          steps {
+            script {
+              sh 'flyway --version'
+          }
+        }
+      }
      stage('migrate') {
       steps {
-        sh 'flyway -user=sonaruser -password=sonar info'
+        script {
+        sh "flyway -user=sonaruser -password=sonar info"
       }
     }
+  }
 	  /*stage('Verify Version') {
               steps {
                   sh 'docker run --rm flyway/flyway:8.5.11 version'
