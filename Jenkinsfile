@@ -9,11 +9,11 @@ pipeline {
     	timeout(time: 30, unit: 'MINUTES')
     }
     stages {
-      stage('Verify Version') {
+      /*stage('Verify Version') {
               steps {
-                  sh 'docker run --entrypoint='' --rm  flyway/flyway:9.1.6 version'
+                  sh 'docker run --rm  flyway/flyway:9.1.6 version'
                 }
-            }
+            }*/
      stage('migrate') {
       steps {
         withDockerContainer("flyway/flyway:9.1.6"){
