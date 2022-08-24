@@ -16,17 +16,17 @@ pipeline {
             }
      stage('migrate') {
       steps {
-        sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:8.5.11 -user=$DB_CREDS_USR -password=$DB_CREDS_PSW migrate'
+        sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:8.5.11 -user=sonaruser -password=$DB_CREDS_PSW migrate'
       }
     }
     stage('validate') {
       steps {
-        sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:8.5.11 -user=$DB_CREDS_USR -password=$DB_CREDS_PSW validate'
+        sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:8.5.11 -user=sonaruser -password=$DB_CREDS_PSW validate'
       }
     }
     stage('info') {
       steps {
-        sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:8.5.11 -user=$DB_CREDS_USR -password=$DB_CREDS_PSW info'
+        sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:8.5.11 -user=sonaruser -password=$DB_CREDS_PSW info'
       }
     }
 }
