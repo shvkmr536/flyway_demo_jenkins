@@ -21,6 +21,7 @@ pipeline {
       steps {
         script {
         sh "sudo flyway -user=sonaruser -password=sonar info"
+        sh "sudo flyway -user=sonaruser -password=sonar cleanup"
       }
     }
   }
