@@ -20,6 +20,7 @@ pipeline {
         sh 'flyway -user=sonaruser -password=sonar info'
       }
     }
+  }
 	  /*stage('Verify Version') {
               steps {
                   sh 'docker run --rm flyway/flyway:8.5.11 version'
