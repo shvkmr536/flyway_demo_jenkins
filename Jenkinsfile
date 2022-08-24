@@ -17,27 +17,6 @@ pipeline {
       }
     }
   }
-	  /*stage('Verify Version') {
-              steps {
-                  sh 'docker run --rm flyway/flyway:8.5.11 version'
-                }
-            }
-     stage('migrate') {
-      steps {
-        sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:8.5.11 -user=sonaruser -password=sonar migrate'
-      }
-    }
-    stage('validate') {
-      steps {
-        sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:8.5.11 -user=sonaruser -password=sonar validate'
-      }
-    }
-    stage('info') {
-      steps {
-        sh 'docker run --rm -v $WORKSPACE/sql:/flyway/sql -v $WORKSPACE/conf:/flyway/conf flyway/flyway:8.5.11 -user=sonaruser -password=sonar info'
-      }
-    }*/
-}
 post {
     always {
       cleanWs()
