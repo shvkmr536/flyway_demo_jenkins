@@ -12,6 +12,7 @@ pipeline {
       stage('Verify Version') {
           steps {
             script {
+              sh 'id'
               sh 'flyway --version'
           }
         }
