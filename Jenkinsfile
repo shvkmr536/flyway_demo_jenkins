@@ -11,7 +11,7 @@ pipeline {
     stages {
       stage('Verify Version') {
               steps {
-                  sh 'docker run --rm flyway/flyway:9.1.6 version'
+                  sh 'docker run --entrypoint='' --rm  flyway/flyway:9.1.6 version'
                 }
             }
      stage('migrate') {
