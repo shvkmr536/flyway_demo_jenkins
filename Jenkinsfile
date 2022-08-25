@@ -13,11 +13,11 @@ pipeline {
       steps {
         script {
           sh 'sudo flyway --version'
-          sh 'sudo flyway -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" info'
           sh 'sudo flyway -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" repair'
           sh 'sudo flyway -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" baseline'
           //sh 'sudo flyway -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" repair'
           sh 'sudo flyway -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" migrate'
+          sh 'sudo flyway -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" info'
       }
     }
   }
