@@ -1,4 +1,4 @@
-/*CREATE TABLE demo_2 (
+CREATE TABLE demo (
 	id SERIAL PRIMARY KEY,
 	url VARCHAR(255) NOT NULL,
 	name VARCHAR(255) NOT NULL,
@@ -6,7 +6,5 @@
     last_update DATE
 );
 
-INSERT INTO demo_2 (url, name)
-VALUES('https://www.postgresqltutorial.com','PostgreSQL Tutorial');*/
-
-DROP TABLE demo_2;
+INSERT INTO demo (url, name)
+VALUES('https://www.postgresqltutorial.com','PostgreSQL Tutorial');
