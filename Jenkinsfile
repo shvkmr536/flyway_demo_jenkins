@@ -16,7 +16,7 @@ pipeline {
           sh 'sudo flyway -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" repair'
           sh 'sudo flyway -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" baseline'
           //sh 'sudo flyway -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" repair'
-          sh 'sudo flyway -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" migrate'
+          sh 'sudo flyway -placeholders.environment=dev -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" migrate'
           sh 'sudo flyway -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" info'
       }
     }
