@@ -1,8 +1,8 @@
 pipeline {
     agent any
      environment {
-     DB_CREDS_DEV = credentials('db_cred_local')
-     DB_CREDS_SIT = credentials('db_cred')
+     DB_CREDS = credentials('db_cred_local')
+     //DB_CREDS_SIT = credentials('db_cred')
   }
     options {
     	buildDiscarder(logRotator(numToKeepStr:'2'))
@@ -22,11 +22,11 @@ pipeline {
         script {
           sh 'sudo flyway --version'
           sh 'ls -lrt'
-          sh 'sudo flyway -locations=filesystem:./sql/dev -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_DEV_PSW}" repair'
-          sh 'sudo flyway -locations=filesystem:./sql/dev -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_DEV_PSW}" baseline'
-          sh 'sudo flyway -locations=filesystem:./sql/dev -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_DEV_PSW}" migrate'
-          //sh 'sudo flyway -placeholders.environment=dev -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_DEV_PSW}" migrate'
-          sh 'sudo flyway -locations=filesystem:./sql/dev -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_DEV_PSW}" info'
+          sh 'sudo flyway -locations=filesystem:./sql/dev -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" repair'
+          sh 'sudo flyway -locations=filesystem:./sql/dev -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" baseline'
+          sh 'sudo flyway -locations=filesystem:./sql/dev -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" migrate'
+          //sh 'sudo flyway -placeholders.environment=dev -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" migrate'
+          sh 'sudo flyway -locations=filesystem:./sql/dev -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" info'
       }
     }
   }
@@ -38,11 +38,11 @@ pipeline {
         script {
           sh 'sudo flyway --version'
           sh 'ls -lrt'
-          //sh 'sudo flyway -locations=filesystem:./sql/sit -configFiles=./conf/env_sit.conf -user=sonaruser -password="${DB_CREDS_SIT_PSW}" repair'
-          sh 'sudo flyway -locations=filesystem:./sql/sit -configFiles=./conf/env_sit.conf -user=sonaruser -password="${DB_CREDS_SIT_PSW}" baseline'
-          sh 'sudo flyway -locations=filesystem:./sql/sit -configFiles=./conf/env_sit.conf -user=sonaruser -password="${DB_CREDS_SIT_PSW}" migrate'
-          //sh 'sudo flyway -placeholders.environment=dev -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_SIT_PSW}" migrate'
-          sh 'sudo flyway -locations=filesystem:./sql/sit -configFiles=./conf/env_sit.conf -user=sonaruser -password="${DB_CREDS_SIT_PSW}" info'
+          //sh 'sudo flyway -locations=filesystem:./sql/sit -configFiles=./conf/env_sit.conf -user=edu -password="${DB_CREDS_SIT_PSW}" repair'
+          sh 'sudo flyway -locations=filesystem:./sql/sit -configFiles=./conf/env_sit.conf -user=edu -password="${DB_CREDS_SIT_PSW}" baseline'
+          sh 'sudo flyway -locations=filesystem:./sql/sit -configFiles=./conf/env_sit.conf -user=edu -password="${DB_CREDS_SIT_PSW}" migrate'
+          //sh 'sudo flyway -placeholders.environment=dev -configFiles=./conf/env_dev.conf -user=edu -password="${DB_CREDS_SIT_PSW}" migrate'
+          sh 'sudo flyway -locations=filesystem:./sql/sit -configFiles=./conf/env_sit.conf -user=edu -password="${DB_CREDS_SIT_PSW}" info'
       }
     }
   }
