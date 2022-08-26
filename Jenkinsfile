@@ -9,18 +9,18 @@ pipeline {
     	timestamps()
     	timeout(time: 30, unit: 'MINUTES')
     }
-    /*parameters {
+    parameters {
         booleanParam(name: 'DEV', defaultValue: true,description: 'Deploying for DEV?');
         booleanParam(name: 'SIT', defaultValue: true,description: 'Deploying for SIT?');
-	  }*/ 
+	  } 
     stages {
      stage('Local DB: migrate') {
-      //when {
-      	//expression { return params.DEV;	}
-       	//}
+      when {
+      	expression { return params.DEV;	}
+       	}
       steps {
         script {
-          sh 'sudo flyway --version'
+          //sh 'sudo flyway --version'
           sh 'ls -lrt'
           sh 'sudo flyway -locations=filesystem:./sql/dev -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" baseline'
           sh 'sudo flyway -locations=filesystem:./sql/dev -configFiles=./conf/env_dev.conf -user=sonaruser -password="${DB_CREDS_PSW}" migrate'
