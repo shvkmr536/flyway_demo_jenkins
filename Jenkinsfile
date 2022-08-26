@@ -38,6 +38,7 @@ pipeline {
           sh 'sudo flyway --version'
           sh 'mv ./sql/sit/R__DATA_PURGING.sql ./sql/sit/R__DATA_PURGING_$(date +%F_%H-%M-%S).sql'
           sh 'ls -lrt'
+          sh 'sudo flyway -locations=filesystem:./sql/sit -configFiles=./conf/env_sit.conf -user=edu -password="${DB_CREDS_SIT_PSW}" repair'
           sh 'sudo flyway -locations=filesystem:./sql/sit -configFiles=./conf/env_sit.conf -user=edu -password="${DB_CREDS_SIT_PSW}" baseline'
           sh 'sudo flyway -locations=filesystem:./sql/sit -configFiles=./conf/env_sit.conf -user=edu -password="${DB_CREDS_SIT_PSW}" migrate'
           sh 'sudo flyway -locations=filesystem:./sql/sit -configFiles=./conf/env_sit.conf -user=edu -password="${DB_CREDS_SIT_PSW}" info'
